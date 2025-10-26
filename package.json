@@ -1,0 +1,24 @@
+{
+  "name": "vite-react-starter",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "vite lint",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.0.0-rc-f994737d14-20240522",
+    "react-dom": "^19.0.0-rc-f994737d14-20240522",
+    "@google/genai": "^1.2.0",
+    "firebase": "^10.12.2"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.0"
+  }
+}

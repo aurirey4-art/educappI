@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es" class="light">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-ducap | Plataforma Educativa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root { /* Tema Claro (Default) */
+        --color-brand-primary: #2B6CB0;
+        --color-brand-secondary: #4299E1;
+        --color-brand-accent: #38A169;
+        --color-brand-background: #F7FAFC;
+        --color-brand-surface: #FFFFFF;
+        --color-brand-text: #2D3748;
+        --color-text-muted: #718096;
+        --color-border: #E2E8F0;
+        --color-status-completed: #38A169;
+        --color-status-pending: #D69E2E;
+        --color-status-overdue: #E53E3E;
+      }
+      html.dark {
+        --color-brand-primary: #63B3ED;
+        --color-brand-secondary: #4299E1;
+        --color-brand-accent: #48BB78;
+        --color-brand-background: #1A202C;
+        --color-brand-surface: #2D3748;
+        --color-brand-text: #F7FAFC;
+        --color-text-muted: #A0AEC0;
+        --color-border: #4A5568;
+        --color-status-completed: #48BB78;
+        --color-status-pending: #F6E05E;
+        --color-status-overdue: #FC8181;
+      }
+      html.soft {
+        --color-brand-primary: #5A67D8;
+        --color-brand-secondary: #7F9CF5;
+        --color-brand-accent: #4FD1C5;
+        --color-brand-background: #F5F5F5;
+        --color-brand-surface: #FFFFFF;
+        --color-brand-text: #434190;
+        --color-text-muted: #718096;
+        --color-border: #EAEAF0;
+        --color-status-completed: #4FD1C5;
+        --color-status-pending: #FBBF24;
+        --color-status-overdue: #F87171;
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'brand-primary': 'var(--color-brand-primary)',
+              'brand-secondary': 'var(--color-brand-secondary)',
+              'brand-accent': 'var(--color-brand-accent)',
+              'brand-background': 'var(--color-brand-background)',
+              'brand-surface': 'var(--color-brand-surface)',
+              'brand-text': 'var(--color-brand-text)',
+              'text-muted': 'var(--color-text-muted)',
+              'border-color': 'var(--color-border)',
+              'status-completed': 'var(--color-status-completed)',
+              'status-pending': 'var(--color-status-pending)',
+              'status-overdue': 'var(--color-status-overdue)',
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+          },
+        },
+      }
+    </script>
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.27.0",
+    "firebase/": "https://aistudiocdn.com/firebase@^12.4.0/"
+  }
+}
+</script>
+</head>
+  <body class="bg-brand-background text-brand-text">
+    <div id="root"></div>
+  </body>
+</html>

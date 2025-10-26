@@ -1,0 +1,5 @@
+{
+  "name": "Plataforma Educativa Integral",
+  "description": "Una aplicación base para la gestión escolar en México, con interfaces dedicadas para padres, maestros y alumnos. Diseñada para ser intuitiva, moderna y escalable.",
+  "requestFramePermissions": []
+}
