@@ -53,6 +53,7 @@ const ParentDashboard: React.FC<DashboardProps> = ({ user: parent, onGoBack }) =
 
     const renderContent = () => {
         switch (activeView) {
+            // FIX: Pass parent prop to child components
             case 'home': return <ParentHome parent={parent} />;
             case 'academics': return <ParentAcademics parent={parent} />;
             case 'tasks': return <ParentTasks parent={parent} />;

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { User } from '../../types';
 
 const students = {
     'Ana García': {
@@ -36,7 +37,8 @@ const GradeRow: React.FC<{ grade: { subject: string; grade: number; teacher: str
     );
 };
 
-const ParentAcademics: React.FC = () => {
+// FIX: Add parent prop to component definition
+const ParentAcademics: React.FC<{ parent: User }> = ({ parent }) => {
     const [selectedStudent, setSelectedStudent] = useState('Ana García');
     const studentData = students[selectedStudent];
 

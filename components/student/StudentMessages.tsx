@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PaperClipIcon from '../icons/PaperClipIcon';
+import { User } from '../../types';
 
 const conversations = [
     { id: 1, name: 'Prof. Ana Torres', avatar: 'AT', lastMessage: 'Hola Alex, he revisado tu tarea...', time: '10:42 AM', unread: 2, role: 'Maestro' },
@@ -19,7 +20,8 @@ const messages = {
     4: [{ from: 'other', text: '¡Excelente trabajo en tu ensayo!', time: 'Hace 3 días' }],
 };
 
-const StudentMessages: React.FC = () => {
+// FIX: Add student prop to component definition
+const StudentMessages: React.FC<{ student: User }> = ({ student }) => {
     const [selectedId, setSelectedId] = useState(1);
     const selectedConversation = conversations.find(c => c.id === selectedId);
 

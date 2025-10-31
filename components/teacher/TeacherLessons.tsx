@@ -1,6 +1,7 @@
 import React from 'react';
 import PlusCircleIcon from '../icons/PlusCircleIcon';
 import SearchIcon from '../icons/SearchIcon';
+import { User } from '../../types';
 
 // Fix: Define interfaces for lesson data and component props
 interface Lesson {
@@ -40,7 +41,8 @@ const LessonCard: React.FC<LessonCardProps> = ({ lesson }) => (
     </div>
 );
 
-const TeacherLessons: React.FC = () => {
+// FIX: Add teacher prop to component definition
+const TeacherLessons: React.FC<{ teacher: User }> = ({ teacher }) => {
     return (
         <div className="animate-fade-in">
             <div className="flex flex-col md:flex-row justify-between md:items-center mb-8 gap-4">

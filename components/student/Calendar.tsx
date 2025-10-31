@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import ChevronLeftIcon from '../icons/ChevronLeftIcon';
 import ChevronRightIcon from '../icons/ChevronRightIcon';
 
-interface CalendarEvent {
+// FIX: Export CalendarEvent interface to be used in other components
+export interface CalendarEvent {
   date: string; // YYYY-MM-DD
   title: string;
   type: 'holiday' | 'exam' | 'deadline' | 'trip';

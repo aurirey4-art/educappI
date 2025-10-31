@@ -1,4 +1,5 @@
 import React from 'react';
+import { User } from '../../types';
 
 const attendanceData = {
     'Ana García': {
@@ -66,7 +67,8 @@ const StudentAttendanceCard: React.FC<{ name: string }> = ({ name }) => {
     );
 };
 
-const ParentAttendance: React.FC = () => {
+// FIX: Add parent prop to component definition
+const ParentAttendance: React.FC<{ parent: User }> = ({ parent }) => {
     return (
         <div className="animate-fade-in">
             <h2 className="text-3xl font-extrabold text-brand-text mb-6">Asistencia y Comportamiento</h2>

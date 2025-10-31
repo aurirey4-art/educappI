@@ -1,4 +1,5 @@
 import React from 'react';
+import { User } from '../../types';
 
 const SettingsSection: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
     <div className="bg-brand-surface p-6 rounded-2xl shadow-sm border border-border-color mb-8">
@@ -21,7 +22,8 @@ const InputField: React.FC<{ label: string; type: string; value: string; placeho
     </div>
 );
 
-const StudentSettings: React.FC = () => {
+// FIX: Add student prop to component definition
+const StudentSettings: React.FC<{ student: User }> = ({ student }) => {
     return (
         <div className="animate-fade-in max-w-4xl mx-auto">
             <h2 className="text-3xl font-extrabold text-brand-text mb-8">Configuración de la Cuenta</h2>

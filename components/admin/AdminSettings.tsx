@@ -38,7 +38,12 @@ const AdminSettings: React.FC = () => {
         secondary: '#4299E1',
         accent: '#38A169',
     });
-    const [initialColors, setInitialColors] = useState({});
+    // FIX: Initialize with the correct shape to avoid type errors.
+    const [initialColors, setInitialColors] = useState({
+        primary: '',
+        secondary: '',
+        accent: '',
+    });
 
     useEffect(() => {
         // Al montar el componente, leer los colores actuales del tema

@@ -56,16 +56,21 @@ const StudentDashboard: React.FC<DashboardProps> = ({ user: student, onGoBack })
     const renderContent = () => {
         switch (activeView) {
             case 'home':
+                // FIX: Pass student prop to StudentProfile
                 return <StudentProfile student={student} setActiveView={setActiveView}/>;
             case 'lessons':
+                // FIX: Pass student prop to StudentLessons
                 return <StudentLessons student={student} />;
             case 'messages':
+                // FIX: Pass student prop to StudentMessages
                 return <StudentMessages student={student} />;
             case 'tasks':
                 return <StudentTasks student={student} />;
             case 'settings':
+                // FIX: Pass student prop to StudentSettings
                 return <StudentSettings student={student} />;
             default:
+                // FIX: Pass student prop to StudentProfile
                 return <StudentProfile student={student} setActiveView={setActiveView}/>;
         }
     };

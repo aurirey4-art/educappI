@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PlusCircleIcon from '../icons/PlusCircleIcon';
+import { User } from '../../types';
 
 const conversations = [
     { id: 1, name: 'Alex Johnson', avatar: 'AJ', lastMessage: 'Gracias por la retroalimentación, profesora.', time: '10:55 AM', unread: 0, role: 'Alumno' },
@@ -8,7 +9,8 @@ const conversations = [
     { id: 4, name: 'Dirección Escolar', avatar: 'DE', lastMessage: 'Junta de personal el próximo viernes.', time: 'Hace 2 días', unread: 0, role: 'Admin' },
 ];
 
-const TeacherMessages: React.FC = () => {
+// FIX: Add teacher prop to component definition
+const TeacherMessages: React.FC<{ teacher: User }> = ({ teacher }) => {
     const [selectedId, setSelectedId] = useState(1);
 
     return (

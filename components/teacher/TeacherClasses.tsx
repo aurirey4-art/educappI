@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import UsersIcon from '../icons/UsersIcon';
 import ArchiveIcon from '../icons/ArchiveIcon';
 import PlusCircleIcon from '../icons/PlusCircleIcon';
+import { User } from '../../types';
 
 // Fix: Define interfaces for class data and component props
 interface ClassInfo {
@@ -41,7 +42,8 @@ const ClassRow: React.FC<ClassRowProps> = ({ classInfo, onArchive }) => (
     </tr>
 );
 
-const TeacherClasses: React.FC = () => {
+// FIX: Add teacher prop to component definition
+const TeacherClasses: React.FC<{ teacher: User }> = ({ teacher }) => {
     const [activeTab, setActiveTab] = useState<'active' | 'archived'>('active');
 
     return (

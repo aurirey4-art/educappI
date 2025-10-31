@@ -6,9 +6,11 @@ import ClockIcon from '../icons/ClockIcon';
 import AlertCircleIcon from '../icons/AlertCircleIcon';
 import PaperPlaneIcon from '../icons/PaperPlaneIcon';
 import CalendarIcon from '../icons/CalendarIcon';
-import Calendar from './Calendar';
+// FIX: Import CalendarEvent type
+import Calendar, { CalendarEvent } from './Calendar';
 
-const importantDates = [
+// FIX: Explicitly type the importantDates array to match CalendarEvent[]
+const importantDates: CalendarEvent[] = [
   { date: '2023-11-15', title: 'Entrega: Ecuaciones Cuadráticas', type: 'deadline' },
   { date: '2023-11-15', title: 'Examen de Matemáticas', type: 'exam' },
   { date: '2023-11-20', title: 'Día de la Revolución (Feriado)', type: 'holiday' },
@@ -101,7 +103,8 @@ const StudentTasks: React.FC<{ student: User }> = ({ student }) => {
       <div className="space-y-8">
         <TaskSection title="Pendientes" tasks={pendingTasks} emptyMessage="¡Felicidades! No tienes tareas pendientes." onUpdateStatus={updateTaskStatus} />
         <TaskSection title="Enviadas" tasks={submittedTasks} emptyMessage="No hay tareas enviadas esperando calificación." onUpdateStatus={updateTaskStatus} />
-        <TaskSection title="Calificadas" tasks={completedTasks} emptyMessage="Aún no tienes tareas calificadas." onUpdate-Status={updateTaskStatus} />
+        {/* FIX: Corrected typo in prop name from onUpdate-Status to onUpdateStatus */}
+        <TaskSection title="Calificadas" tasks={completedTasks} emptyMessage="Aún no tienes tareas calificadas." onUpdateStatus={updateTaskStatus} />
       </div>
     </div>
   );

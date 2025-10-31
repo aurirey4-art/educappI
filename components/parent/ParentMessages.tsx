@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { User } from '../../types';
 
 const conversations = [
     { id: 1, name: 'Prof. Ana Torres (Mat.)', avatar: 'AT', lastMessage: 'Re: Duda sobre tarea de Ana', time: '11:30 AM', unread: 1 },
@@ -6,7 +7,8 @@ const conversations = [
     { id: 3, name: 'Dirección Escolar', avatar: 'DE', lastMessage: 'Comunicado: Junta de Padres', time: 'Hace 2 días', unread: 0 },
 ];
 
-const ParentMessages: React.FC = () => {
+// FIX: Add parent prop to component definition
+const ParentMessages: React.FC<{ parent: User }> = ({ parent }) => {
     const [selectedId, setSelectedId] = useState(1);
 
     return (

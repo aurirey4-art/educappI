@@ -53,6 +53,7 @@ const TeacherDashboard: React.FC<DashboardProps> = ({ user: teacher, onGoBack })
         const teacherClasses = data.users.filter(u => u.role === 'student' && u.classIds?.some(id => teacher.classIds?.includes(id)));
 
         switch (activeView) {
+            // FIX: Pass teacher prop to child components
             case 'home': return <TeacherHome teacher={teacher} setActiveView={setActiveView} />;
             case 'classes': return <TeacherClasses teacher={teacher} />;
             case 'lessons': return <TeacherLessons teacher={teacher} />;

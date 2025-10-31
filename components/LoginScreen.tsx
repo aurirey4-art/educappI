@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { Role } from '../types';
 
-const LoginScreen: React.FC = () => {
+interface LoginScreenProps {
+  onSimulatedLogin: (role: Role) => void;
+}
+
+const LoginScreen: React.FC<LoginScreenProps> = ({ onSimulatedLogin }) => {
     const [email, setEmail] = useState('alex.j@email.com');
     const [password, setPassword] = useState('password123'); // Usar una contraseña de prueba
     const [error, setError] = useState<string | null>(null);
@@ -23,11 +28,6 @@ const LoginScreen: React.FC = () => {
             setIsLoading(false);
         }
     };
-
-    const quickLogin = (userEmail: string) => {
-      setEmail(userEmail);
-      setPassword('password123');
-    }
 
   return (
     <div className="animate-fade-in text-center flex flex-col items-center">
@@ -71,13 +71,22 @@ const LoginScreen: React.FC = () => {
                     {isLoading ? 'Ingresando...' : 'Ingresar'}
                 </button>
             </form>
-            <div className="mt-6">
-                <p className="text-sm text-text-muted">O ingresa rápidamente como:</p>
-                <div className="flex justify-center gap-2 mt-2">
-                    <button onClick={() => quickLogin('alex.j@email.com')} className="text-xs font-semibold text-brand-secondary p-1 hover:underline">Alumno</button>
-                    <button onClick={() => quickLogin('ana.torres@educap.edu')} className="text-xs font-semibold text-brand-secondary p-1 hover:underline">Maestro</button>
-                    <button onClick={() => quickLogin('c.garcia@email.com')} className="text-xs font-semibold text-brand-secondary p-1 hover:underline">Tutor</button>
-                     <button onClick={() => quickLogin('admin@educap.edu')} className="text-xs font-semibold text-brand-secondary p-1 hover:underline">Admin</button>
+             <div className="relative my-6">
+              <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                <div className="w-full border-t border-border-color" />
+              </div>
+              <div className="relative flex justify-center">
+                <span className="bg-brand-surface px-2 text-sm text-text-muted">O</span>
+              </div>
+            </div>
+
+            <div>
+                <p className="text-sm text-text-muted">Probar la aplicación como:</p>
+                <div className="grid grid-cols-2 gap-3 mt-3">
+                    <button onClick={() => onSimulatedLogin('student')} className="w-full bg-brand-background border border-border-color text-brand-text font-semibold py-2 rounded-lg hover:bg-brand-surface transition-colors">Alumno</button>
+                    <button onClick={() => onSimulatedLogin('teacher')} className="w-full bg-brand-background border border-border-color text-brand-text font-semibold py-2 rounded-lg hover:bg-brand-surface transition-colors">Maestro</button>
+                    <button onClick={() => onSimulatedLogin('parent')} className="w-full bg-brand-background border border-border-color text-brand-text font-semibold py-2 rounded-lg hover:bg-brand-surface transition-colors">Tutor</button>
+                    <button onClick={() => onSimulatedLogin('admin')} className="w-full bg-brand-background border border-border-color text-brand-text font-semibold py-2 rounded-lg hover:bg-brand-surface transition-colors">Admin</button>
                 </div>
             </div>
         </div>

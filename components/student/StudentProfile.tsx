@@ -4,6 +4,7 @@ import DownloadIcon from '../icons/DownloadIcon';
 import BookOpenIcon from '../icons/BookOpenIcon';
 import ClipboardCheckIcon from '../icons/ClipboardCheckIcon';
 import ChartBarIcon from '../icons/ChartBarIcon';
+import { User } from '../../types';
 
 const CircularProgress: React.FC<{ progress: number }> = ({ progress }) => {
     const strokeWidth = 10;
@@ -57,8 +58,8 @@ const QuickAccessCard: React.FC<{ title: string; icon: React.ReactNode; onClick:
     </button>
 );
 
-
-const StudentProfile: React.FC<{setActiveView: (view: any) => void}> = ({ setActiveView }) => {
+// FIX: Add student prop to component definition
+const StudentProfile: React.FC<{student: User, setActiveView: (view: any) => void}> = ({ student, setActiveView }) => {
   return (
     <div className="animate-fade-in">
         <div className="flex flex-col md:flex-row justify-between md:items-center mb-8 gap-4">

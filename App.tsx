@@ -4,71 +4,89 @@ import StudentDashboard from './components/StudentDashboard';
 import TeacherDashboard from './components/TeacherDashboard';
 import ParentDashboard from './components/ParentDashboard';
 import AdminDashboard from './components/AdminDashboard';
-import { User } from './types';
+import { User, Role } from './types';
 import { DataProvider, useData } from './contexts/DataContext';
 import LoginScreen from './components/LoginScreen';
 import { auth } from './firebase';
 
 function AppContent() {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [isSimulated, setIsSimulated] = useState(false);
   const [loading, setLoading] = useState(true);
   const { data } = useData();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser && data.users.length > 0) {
-        // En una app real, obtendrías el perfil del usuario desde Firestore.
-        // Aquí, lo buscamos en nuestros datos cargados por email.
+        // A real user is logged in
         const userProfile = data.users.find(u => u.email === firebaseUser.email);
         setCurrentUser(userProfile || null);
-      } else {
+        setIsSimulated(false); // This is a real session
+      } else if (!isSimulated) {
+        // No real user, and not in a simulation, so clear the user.
         setCurrentUser(null);
       }
       setLoading(false);
     });
 
     return () => unsubscribe(); // Limpiar el listener al desmontar
-  }, [data.users]);
+  }, [data.users, isSimulated]);
 
 
   const handleLogout = async () => {
     try {
-      await signOut(auth);
+      if (auth.currentUser) {
+        await signOut(auth);
+      }
+      // For both real and simulated sessions, reset state
       setCurrentUser(null);
+      setIsSimulated(false);
     } catch (error) {
       console.error("Error al cerrar sesión:", error);
     }
   };
   
   const handleLoginAs = (user: User) => {
-    // Esta función ahora simula el cambio de usuario en el frontend,
-    // ya que la autenticación real no permite un "login as" directo.
+    // This function is for an admin viewing as another user.
+    // It's not a full simulation, as the admin auth state is preserved.
     console.log(`Admin is viewing as ${user.name}`);
     setCurrentUser(user);
   }
   
   const handleGoBack = () => {
       // Vuelve al usuario admin original
-      const adminUser = data.users.find(u => u.role === 'admin');
+      const adminUser = data.users.find(u => u.email === auth.currentUser?.email);
       setCurrentUser(adminUser || null);
+  }
+
+  const handleSimulatedLogin = (role: Role) => {
+    const userToSimulate = data.users.find(u => u.role === role);
+    if (userToSimulate) {
+      setCurrentUser(userToSimulate);
+      setIsSimulated(true);
+    } else {
+      console.error(`Could not find a user with role: ${role} to simulate.`);
+    }
   }
 
   const renderDashboard = () => {
     if (!currentUser) return null;
     
-    // Si el admin está viendo como otro usuario, el botón de "volver" debe restaurar al admin.
-    const onGoBack = currentUser.role !== 'admin' && data.users.find(u => u.email === auth.currentUser?.email)?.role === 'admin' 
-        ? handleGoBack 
-        : handleLogout;
+    // If an admin is viewing as another user, onGoBack restores the admin session.
+    // For all other users (including simulated ones), it acts as a logout.
+    const isAdminViewingAs = !isSimulated && currentUser.role !== 'admin' && data.users.find(u => u.email === auth.currentUser?.email)?.role === 'admin';
+    
+    const onGoBackAction = isAdminViewingAs ? handleGoBack : handleLogout;
 
     switch (currentUser.role) {
       case 'student':
-        return <StudentDashboard user={currentUser} onGoBack={onGoBack} />;
+        return <StudentDashboard user={currentUser} onGoBack={onGoBackAction} />;
       case 'teacher':
-        return <TeacherDashboard user={currentUser} onGoBack={onGoBack} />;
+        return <TeacherDashboard user={currentUser} onGoBack={onGoBackAction} />;
       case 'parent':
-        return <ParentDashboard user={currentUser} onGoBack={onGoBack} />;
+        return <ParentDashboard user={currentUser} onGoBack={onGoBackAction} />;
       case 'admin':
+        // For admin, the back button is always a logout unless they are viewing as someone else.
         return <AdminDashboard user={currentUser} onGoBack={handleLogout} onLoginAs={handleLoginAs} />;
       default:
         return null;
@@ -85,10 +103,10 @@ function AppContent() {
 
   return (
       <div className="bg-brand-background min-h-screen w-full flex items-center justify-center font-sans p-4">
-        {auth.currentUser && currentUser ? (
+        {currentUser ? (
           renderDashboard()
         ) : (
-          <LoginScreen />
+          <LoginScreen onSimulatedLogin={handleSimulatedLogin} />
         )}
       </div>
   );

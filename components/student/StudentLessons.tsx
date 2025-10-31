@@ -5,6 +5,7 @@ import VideoCameraIcon from '../icons/VideoCameraIcon';
 import DocumentTextIcon from '../icons/DocumentTextIcon';
 import CubeIcon from '../icons/CubeIcon';
 import BookmarkIcon from '../icons/BookmarkIcon';
+import { User } from '../../types';
 
 
 const lessons = [
@@ -50,8 +51,8 @@ const LessonCard: React.FC<{ lesson: typeof lessons[0] }> = ({ lesson }) => (
     </div>
 );
 
-
-const StudentLessons: React.FC = () => {
+// FIX: Add student prop to component definition
+const StudentLessons: React.FC<{ student: User }> = ({ student }) => {
   return (
     <div className="animate-fade-in">
         <div className="flex flex-col md:flex-row justify-between md:items-center mb-8 gap-4">

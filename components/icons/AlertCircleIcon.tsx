@@ -1,6 +1,7 @@
 import React from 'react';
 
-const AlertCircleIcon: React.FC<{width?: number, height?: number}> = ({width=24, height=24}) => (
+// FIX: Add className to props to allow for custom styling
+const AlertCircleIcon: React.FC<{width?: number, height?: number, className?: string}> = ({width=24, height=24, className}) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}
@@ -11,6 +12,7 @@ const AlertCircleIcon: React.FC<{width?: number, height?: number}> = ({width=24,
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
+    className={className}
   >
     <circle cx="12" cy="12" r="10" />
     <line x1="12" y1="8" x2="12" y2="12" />

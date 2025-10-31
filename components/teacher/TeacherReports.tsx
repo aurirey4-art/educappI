@@ -3,6 +3,7 @@ import ChartBarIcon from '../icons/ChartBarIcon';
 import CheckCircleIcon from '../icons/CheckCircleIcon';
 import ChatBubbleIcon from '../icons/ChatBubbleIcon';
 import ProfileIcon from '../icons/ProfileIcon';
+import { User } from '../../types';
 
 
 const ReportCard = ({ title, description, icon }) => (
@@ -16,7 +17,8 @@ const ReportCard = ({ title, description, icon }) => (
     </div>
 );
 
-const TeacherReports: React.FC = () => {
+// FIX: Add teacher prop to component definition
+const TeacherReports: React.FC<{ teacher: User }> = ({ teacher }) => {
     return (
         <div className="animate-fade-in">
             <div className="flex flex-col md:flex-row justify-between md:items-center mb-8 gap-4">
